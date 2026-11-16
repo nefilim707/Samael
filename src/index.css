@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: #0a080c;
+    color: #f3eef7;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Subtle traditional Japanese Seigaiha / lacquer texture overlay at ultra-low opacity */
+.pattern-lacquer {
+  background-image: radial-gradient(rgba(201, 162, 77, 0.045) 1px, transparent 1px),
+    radial-gradient(rgba(242, 184, 198, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
+}
+
+/* Sakura falling petal animation (compositor-only transform + opacity) */
+@keyframes sakuraDrift {
+  0% {
+    transform: translate3d(0, -8vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.65;
+  }
+  85% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(90px, 105vh, 0) rotate(240deg);
+    opacity: 0;
+  }
+}
+
+.sakura-petal {
+  animation-name: sakuraDrift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sakura-petal {
+    animation: none;
+    display: none;
+  }
+}
+
+/* Refined dark scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a080c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #271f30;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9e1b32;
+}
